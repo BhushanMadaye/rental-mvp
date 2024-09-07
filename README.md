@@ -1,2 +1,2 @@
 # survey-builder
-Dynamic survey builder
+Landing page
