@@ -21,6 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd frontend
+          npm i @angular/cli@15.2.10
           npm install
 
       - name: Build the Angular project
