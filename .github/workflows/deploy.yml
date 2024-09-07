@@ -1,0 +1,35 @@
+name: Deploy Angular to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Adjust to your default branch
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '19.9.0'  # Use the version compatible with your Angular project
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+
+      - name: Build the Angular project
+        run: |
+          cd frontend
+          ng build --output-path=dist --base-href "/rental-mvp/"
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./frontend/dist
